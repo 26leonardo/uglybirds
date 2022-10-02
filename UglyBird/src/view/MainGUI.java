@@ -39,6 +39,14 @@ public class MainGUI extends JFrame{
         this.add(startMenuLayer);
 
 //andrà messo sulla parte logica (tutto dentro un while(true)), ora è per provare, però in qualche modo andrà anche aggiunto tutto nel costruttore, vediamo poi come
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(WIDTH, HEIGHT);
+        this.setResizable(false);
+        this.setVisible(true);
+
+        ImageIcon logo = new ImageIcon("../media/img/logo.png");
+        this.setIconImage(logo.getImage());
+
         if(START_GAME){
             this.remove(startMenuLayer);
             this.add(canvaLayer);
@@ -50,21 +58,14 @@ public class MainGUI extends JFrame{
                 if(START_MENU){
                     this.remove(endMenuLayer);
                     this.add(startMenuLayer);
-                    START_GAME = true;
+                    START_GAME = false;
                     END_GAME = false;
                     START_MENU = false;
                 }
             }
         }
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(WIDTH, HEIGHT);
-        this.setResizable(false);
-        this.setVisible(true);
-       
-        ImageIcon logo = new ImageIcon("../media/img/logo.png");
-		this.setIconImage(logo.getImage());
     }
+
 
     public static void main(String[] args) {
         //Schedule a job for the event-dispatching thread:

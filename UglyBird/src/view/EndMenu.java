@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
+//import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -67,10 +67,10 @@ public class EndMenu extends JPanel implements ActionListener {
         buttonBackToStartMenu.setFocusable(false); 
         //buttonBackToStartMenu.setFont(FontReader.readFont("angry-birds"));
         buttonBackToStartMenu.setFont(MainGUI.ANGRY_BIRDS_FONT);
-        buttonBackToStartMenu.setBackground(new Color(255, 128, 0));   
-        buttonBackToStartMenu.setBorder(BorderFactory.createEtchedBorder());
+        //buttonBackToStartMenu.setBackground(new Color(255, 128, 0));   
+        //buttonBackToStartMenu.setBorder(BorderFactory.createEtchedBorder());
         buttonBackToStartMenu.setBounds(800, 575, 230, 40);
-        buttonBackToStartMenu.setForeground(new Color(255, 204, 153));
+        //buttonBackToStartMenu.setForeground(new Color(255, 204, 153));
         buttonBackToStartMenu.addActionListener(this);
         //alternativa a implementare il metodo action performed: buttonBackToStartMenu.addActionListener(e -> System.out.println("Button pressed"));
         this.add(buttonBackToStartMenu);
