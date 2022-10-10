@@ -4,6 +4,7 @@ import view.IView;
 
 public class Logic implements ILogic{
     private static Logic instance=null;
+    private IView iView;
 
     //costanti
 
@@ -102,10 +103,16 @@ public class Logic implements ILogic{
         // TODO Auto-generated method stub
         return 0;
     }
+
+    @Override
+    public void resetSettings(){
+        //TODO
+    }
+
 */
     public static Logic getInstance(){
         if(instance==null)
-            instance=new Logic();        
+            instance=new Logic();   
         return instance;
     }
 }

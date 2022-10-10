@@ -18,6 +18,7 @@ public interface ILogic {
     // public boolean ArcIsVisible();
     // public boolean Impact(); //non so come specificare anche quali due oggetti collidono
     // public boolean Win();
+    // public void resetSettings();
     // public int NumPodium(); //se 0 o >4 non sta sul podio, se 1 è primo, se 2 secondo, se 3 terzo
 
     public static ILogic getILogic(){

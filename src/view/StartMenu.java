@@ -5,7 +5,6 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-//import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
@@ -15,82 +14,42 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class StartMenu extends JPanel implements ActionListener{
 
-    Image nameLogo;
     JTextField nameField;
-    Image greenPigImage;
     ImageIcon greenPigIcon;
-    Image pinkPigImage;
     ImageIcon pinkPigIcon;
-    Image yellowPigImage;
     ImageIcon yellowPigIcon;
-    Image bluePigImage;
     ImageIcon bluePigIcon;
     JComboBox<String> difficultyChoose;
     JComboBox<String> chooseLevel;
     ButtonGroup pigButtons;
-    ButtonGroup soundButtons;
     JRadioButton greenPigButton;
     JRadioButton pinkPigButton;
     JRadioButton bluePigButton;
     JRadioButton yellowPigButton;
+    ButtonGroup soundButtons;
     JRadioButton soundOnButton;
     JRadioButton soundOffButton;
     JButton confirm;
     JLabel errorMessage;
 
+    String playerName;
+    int difficulty;
+    int level;
+    String pigColour;
+    String sound;
+
     public StartMenu(){
         super();
-        //this.setOpaque(MainGUI.START_MENU_VISIBLE);
         this.setBackground(new Color(204, 255, 153));
         this.setPreferredSize(new Dimension(MainGUI.WIDTH, MainGUI.HEIGHT));
         this.setSize(MainGUI.WIDTH,MainGUI.HEIGHT);
-
-        try {
-            this.nameLogo = ImageIO.read(new File("../media/img/nome-logo.png")).getScaledInstance(600, 150, Image.SCALE_AREA_AVERAGING);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            this.greenPigImage = ImageIO.read(new File("../media/img/green-pig.png")).getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            this.pinkPigImage = ImageIO.read(new File("../media/img/pink-pig.png")).getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            this.yellowPigImage = ImageIO.read(new File("../media/img/yellow-pig.png")).getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        try {
-            this.bluePigImage = ImageIO.read(new File("../media/img/blue-pig.png")).getScaledInstance(50, 50, Image.SCALE_AREA_AVERAGING);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 
         this.setLayout(new GridBagLayout());
 
@@ -114,7 +73,6 @@ public class StartMenu extends JPanel implements ActionListener{
         this.add(nameField, gb);
 
         JLabel chooseDifficulty = new JLabel("Choose the difficulty: ");
-        //insertName.setFont(FontReader.readFont("angry-birds"));
         chooseDifficulty.setFont(MainGUI.ANGRY_BIRDS_FONT);
         gb.gridx = 0;
         gb.gridy = 1;
@@ -135,7 +93,6 @@ public class StartMenu extends JPanel implements ActionListener{
         this.add(difficultyChoose, gb);
 
         JLabel chooseLevelText = new JLabel("Choose the level: ");
-        //insertName.setFont(FontReader.readFont("angry-birds"));
         chooseLevelText.setFont(MainGUI.ANGRY_BIRDS_FONT);
         gb.gridx = 0;
         gb.gridy = 2;
@@ -185,7 +142,7 @@ public class StartMenu extends JPanel implements ActionListener{
 
         yellowPigButton.setFont(MainGUI.ANGRY_BIRDS_FONT);
         yellowPigButton.setBackground(null);
-        yellowPigButton.addActionListener(this);        //scrivi cosa deve fare nel caso
+        yellowPigButton.addActionListener(this);        
         this.yellowPigButton.setActionCommand("yellow");
 
         pigButtons = new ButtonGroup();
@@ -219,7 +176,7 @@ public class StartMenu extends JPanel implements ActionListener{
         this.add(yellowPigButton, gb);
 
         JLabel greenPigLabel = new JLabel();
-        greenPigIcon = new ImageIcon(greenPigImage);
+        greenPigIcon = new ImageIcon(Images.imagesArray[Images.GREEN_PIG]);
         greenPigLabel.setIcon(greenPigIcon);
         gb.gridx = 1;
         gb.gridy = 4;
@@ -228,7 +185,7 @@ public class StartMenu extends JPanel implements ActionListener{
         this.add(greenPigLabel, gb);
 
         JLabel pinkPigLabel = new JLabel();
-        pinkPigIcon = new ImageIcon(pinkPigImage);
+        pinkPigIcon = new ImageIcon(Images.imagesArray[Images.PINK_PIG]);
         pinkPigLabel.setIcon(pinkPigIcon);
         gb.gridx = 2;
         gb.gridy = 4;
@@ -237,7 +194,7 @@ public class StartMenu extends JPanel implements ActionListener{
         this.add(pinkPigLabel, gb);
 
         JLabel bluePigLabel = new JLabel();
-        bluePigIcon = new ImageIcon(bluePigImage);
+        bluePigIcon = new ImageIcon(Images.imagesArray[Images.BLUE_PIG]);
         bluePigLabel.setIcon(bluePigIcon);
         gb.gridx = 3;
         gb.gridy = 4;
@@ -246,7 +203,7 @@ public class StartMenu extends JPanel implements ActionListener{
         this.add(bluePigLabel, gb);
 
         JLabel yellowPigLabel = new JLabel();
-        yellowPigIcon = new ImageIcon(yellowPigImage);
+        yellowPigIcon = new ImageIcon(Images.imagesArray[Images.YELLOW_PIG]);
         yellowPigLabel.setIcon(yellowPigIcon);
         gb.gridx = 4;
         gb.gridy = 4;
@@ -311,13 +268,12 @@ public class StartMenu extends JPanel implements ActionListener{
         this.add(confirm, gb);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==confirm){  
+    public void actionPerformed(ActionEvent e) { 
+        if(e.getSource()==confirm){     //rendi possibile con tasto invio anche
             if(nameField.getText().length() == 0){ 
                 System.out.println("Please insert a valid name");
                 errorMessage.setText("Please insert a valid name.");
             }else{
-                //confirm.setEnabled(false); 
                 System.out.println("Name: " + nameField.getText());  
                 System.out.println("Selected difficulty: " + difficultyChoose.getSelectedItem());  
                 System.out.println("Selected level: " + chooseLevel.getSelectedItem());  
@@ -325,6 +281,14 @@ public class StartMenu extends JPanel implements ActionListener{
                 System.out.println("Sound: " + soundButtons.getSelection().getActionCommand()); 
 
                 MainGUI.getInstance().flip("CANVA");
+
+                playerName = nameField.getText();
+                difficulty = difficultyChoose.getSelectedIndex();
+                level = chooseLevel.getSelectedIndex(); 
+                pigColour = pigButtons.getSelection().getActionCommand();
+                sound = soundButtons.getSelection().getActionCommand();
+
+                //System.out.println("Get pig colour: " + this.getPigColour()); 
 
                 nameField.setText("");
                 difficultyChoose.setSelectedIndex(0);
@@ -335,12 +299,31 @@ public class StartMenu extends JPanel implements ActionListener{
             }
         }
     }
+    public String getPlayerName(){
+       return playerName;
+    }
+
+    public int getDifficulty(){
+        return difficulty;
+    }
+
+    public int getLevel(){
+        return level;
+    }
+
+    public String getPigColour(){
+        return pigColour;
+    }
+
+    public String getSoundState(){
+        return sound;
+    }
 
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g; 
     //FINO A QUI SEMPRE COSì
-        g2.drawImage(nameLogo, 250, 5, null);
+        g2.drawImage(Images.imagesArray[Images.TITLE], 250, 5, null);
     }
 }
