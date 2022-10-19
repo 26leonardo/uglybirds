@@ -1,11 +1,14 @@
 package view;
 
 public interface IView{
-    // public String getplayerName();
-    // public int getdifficultyLevel();
-    // public int getXCatapult();
-    // public int getYCatapult();
+    public String getPlayerName();
+    public int getDifficulty();
+    public int getLevel();
+    //public String getPigColour();
+    public String getSoundState();
+    public int getXReleased();
+    public int getYReleased();
     public static IView getIView(){
-        return View.getInstance();
+        return MainGUI.getInstance();
     }
 }

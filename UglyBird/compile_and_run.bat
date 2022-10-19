@@ -1,5 +1,5 @@
 cd src
-javac -d ..\bin view\MainGUI.java
+javac -d ..\bin Main.java
 cd ..\bin
-java view.MainGUI
+java Main
 cd ..
